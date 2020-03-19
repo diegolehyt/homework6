@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Weather App</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+<body>
+    
+    <div class="conteiner">
+        <div class="row">
+            <div id="navBar" class="col-12">
+                Weather Dashboard
+            </div>
+        </div>
+        <!-- main starts here! -->
+        <div class="row">
+            <!-- sideBar -->
+            <div id="sideBar" class="col-3">
+                <h5 style="font-weight: 40px; margin-top: 10px;">Search for a City</h5>
+                <input type="text" id="cityInput" onfocus="this.value=''">
+                <button type="button" class="btn btn-primary" id="searchBtn">
+                    <i class="fa fa-search"></i>
+                </button>
+                <br>
+                <br>
+                <div class="card col-12" style="width: 18rem;">
+                    <ul class="list-group list-group-flush" id="list">
+
+                    </ul>
+                </div>
+            </div>
+            <!-- right side -->
+            <div class="col-9">
+                <div id="currentWeather" class="row">
+                    <div class="card card2">
+                        <div class="card-body DayBlock">
+                          <h5 class="card-title cityN"><span id='cityName'></span><span id='date'></span><img id='mainI'></h5>
+                          <p class="card-text winfo">Temperture: <span id="mainT"> answer</span></p>
+                          <p class="card-text winfo">Humedity: <span id="mainH"> answer</span></p>
+                          <p class="card-text winfo">Wind Speed info: <span id="mainW"> answer</span></p>
+                          <p class="card-text winfo">UV Index: <span id='UV' style="background-color: red; padding: 3px; color: white;"> Number</span></p>
+                          
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="height: 50px;">
+                    <h5 style="font-weight: 40px; margin-left: 10px;">5-Day Forecast:</h5>
+                </div>
+                <!-- next days blocks -->
+                <div class="row">
+                    <div class="col DayBlock2" style="margin: 0px 10px;">
+                        <h6 class='h6'>day/month/year</h6>
+                        <br>
+                        <p><i>ICON</i></p>
+                        <p>Tempt: <span id='day1T'></span> </p>
+                        <p>Humedity: <span id='day1H'></span> </p>
+                    </div>
+                    <div class="col DayBlock3" style="margin-right: 10px;" >
+                        <h6 class='h6'>day/month/year</h6>
+                        <br>
+                        <p><i>ICON</i></p>
+                        <p>Tempt: <span id='day2T'></span> </p>
+                        <p>Humedity: <span id='day2H'></span> </p>
+                    </div>
+                    <div class="col DayBlock4" style="margin-right: 10px;">
+                        <h6 class='h6'>day/month/year</h6>
+                        <br>
+                        <p><i>ICON</i></p>
+                        <p>Tempt: </p>
+                        <p>Humedity: </p>
+                    </div>
+                    <div class="col DayBlock5" style="margin-right: 10px;">
+                        <h6 class='h6'>day/month/year</h6>
+                        <br>
+                        <p><i>ICON</i></p>
+                        <p>Tempt: </p>
+                        <p>Humedity: </p>
+                    </div>
+                    <div class="col DayBlock6" style="margin-right: 35px;">
+                        <h6 class='h6'>day/month/year</h6>
+                        <br>
+                        <p><i>ICON</i></p>
+                        <p>Tempt: </p>
+                        <p>Humedity: </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+    <script src='script.js'></script>
+</body>
+</html>

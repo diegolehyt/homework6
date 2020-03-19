@@ -1,0 +1,56 @@
+
+#navBar {
+    background-color: black;
+    font-size: 50px;
+    color: white;
+    text-align: center;
+    height: 80px;
+
+}
+#sideBar {
+    background-color:rgb(233, 230, 230);
+    height: 550px;
+    padding-left: 30px;
+    
+}
+#currentWeather {
+    background-color: white;
+    height: 300px
+}
+/*sizing styles*/
+.container {
+    
+}
+.row {
+    
+    
+}
+.col {
+    display: inline-block;
+    color:white;
+    background-color: rgb(0, 132, 255);
+    border-radius: 5px;
+    height: 200px;
+    width : 20%;
+}
+
+/*side Bar*/
+
+.card2 {
+    margin: 10px;
+    width: 95%;
+}
+/*right side*/
+.winfo {
+    line-height: 30px;
+}
+.cityName {
+    line-height: 40px;
+}
+.cityN {
+    margin-bottom: 0px;
+}
+/*Blocks*/
+.h6 {
+    margin-top: 10px;
+}
