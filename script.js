@@ -4,11 +4,13 @@ let searchBtn = document.getElementById('searchBtn');
 
 
 
-// Initial array of movie titles
-let cities = [
-    'Santiago',
-    'New York'
-]
+// Initial array of city names
+let cities = []
+
+if (localStorage.getItem('LScities') !== null){
+  cities = localStorage.getItem('LScities');
+  cities = JSON.parse(cities);
+}
 
 //time variables
 let currentDate = new Date();
@@ -30,7 +32,12 @@ let addButtons = function (){
     //input city
     let cityInput = document.getElementById('cityInput').value;
     cities.push(cityInput)
+    //Set in LS
+    LScities = cities;
+    LScities = JSON.stringify(LScities);
+    localStorage.setItem('LScities', LScities);
     renderButtons()
+
 }
 // Call the renderButtons function to display the initial list of cities
 renderButtons()
