@@ -7,6 +7,7 @@ let searchBtn = document.getElementById('searchBtn');
 // Initial array of city names
 let cities = []
 
+//Get cities From LS
 if (localStorage.getItem('LScities') !== null){
   cities = localStorage.getItem('LScities');
   cities = JSON.parse(cities);
@@ -26,7 +27,7 @@ for (let i=0; i < 5 ;i++){
   document.getElementsByClassName('h6')[i].innerHTML = currentDay;
 }
 
-//functions-----------------------------------
+//Functions-----------------------------------
 
 let addButtons = function (){
     //input city
@@ -58,8 +59,37 @@ function displayCityInfo () {
         document.getElementById('mainT').textContent = JSON.stringify(cityData.main.temp);
         document.getElementById('cityName').textContent = JSON.stringify(cityData.name);
         document.getElementById('mainW').textContent = JSON.stringify(cityData.wind.speed);
-        document.getElementById('UV').textContent = JSON.stringify(cityData.cod); //change UV
+
         document.getElementById('mainI').src = `http://openweathermap.org/img/wn/${cityData.weather[0].icon}.png`;
+        //fetch UV
+        let lat = JSON.stringify(cityData.coord.lat);
+        let lon = JSON.stringify(cityData.coord.lon);
+        let url3 = 'http://api.openweathermap.org/data/2.5/uvi/history?appid=a20945d7ff2c1d7b2d2fb96e4f52ee9f&lat='+ lat + '&lon=' + lon + '&cnt=1&start=1498049953&end=1498481991';
+        fetch(url3)
+        .then(function (result) {
+          return result.json()
+        })
+        .then(function (cityData) {
+          let UV = document.getElementById('UV');
+          UV.textContent = JSON.stringify(cityData[0].value);
+          if (UV.innerText < 3.00 ){
+            UV.style.backgroundColor = "";
+            UV.style.backgroundColor = "green";
+          }
+          else if (UV.innerText < 6.00){
+            UV.style.backgroundColor = "";
+            UV.style.backgroundColor = "yellow";
+          }
+          else if (UV.innerText < 8.00){
+            UV.style.backgroundColor = "";
+            UV.style.backgroundColor = "orange";
+          }
+          else if (UV.innerText >= 8.00){
+            UV.style.backgroundColor = "";
+            UV.style.backgroundColor = "red";
+          }
+        })
+
         
       })
     //call Api 2
@@ -114,6 +144,7 @@ function renderButtons () {
 
 //Search Button
 searchBtn.addEventListener("click", addButtons)
+
 
 
 
