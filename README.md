@@ -3,7 +3,7 @@ Name
 
 # "Server Side APIs, "Weather Dashboard".
 
-![gif](https://gyazo.com/5fa6ec4500202c4e243bcb770799431d)
+![gif](images/0.gif)
 
 
 # Instruction 
