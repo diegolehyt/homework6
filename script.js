@@ -1,8 +1,9 @@
+//--------------------------------------------------------------------------------------------------------------------------------------------
+//-----------------------------------------------/  Homework 6, Weather Dashboard  /----------------------------------------------------------
+//--------------------------------------------------------------------------------------------------------------------------------------------
 
-
+// Search Button
 let searchBtn = document.getElementById('searchBtn');
-
-
 
 // Initial array of city names
 let cities = []
@@ -18,7 +19,7 @@ if (localStorage.getItem('LScities') !== null){
 //time variables
 let currentDate = new Date();
 let cDate = currentDate.getDate();
-let cMonth = currentDate.getMonth();
+let cMonth = currentDate.getMonth() + 1;
 let cYear = currentDate.getFullYear();
 
 let currentDay = cDate + '/' + cMonth + '/' + cYear;
@@ -29,7 +30,7 @@ for (let i=0; i < 5 ;i++){
   document.getElementsByClassName('h6')[i].innerHTML = currentDay;
 }
 
-//Functions-----------------------------------
+//----------------------------------------------------------/  Functions  /-------------------------------------------------------------------
 
 let addButtons = function (){
     //input city
@@ -45,48 +46,51 @@ let addButtons = function (){
 // Call the renderButtons function to display the initial list of cities
 renderButtons()
 
+// Display City Weather 
 function displayCityInfo () {
     let cityInput = this.getAttribute('data-cityName')
     let url = 'https://api.openweathermap.org/data/2.5/weather?q=' + cityInput + '&appid=a20945d7ff2c1d7b2d2fb96e4f52ee9f';
     let url2 = 'https://api.openweathermap.org/data/2.5/forecast?q=' + cityInput + '&appid=a20945d7ff2c1d7b2d2fb96e4f52ee9f';
     
-    //call Api 1
+    //---------------------------------------------------/  call Api 1  /--------------------------------------------------------------------
     fetch(url)
       .then(function (result) {
         return result.json()
       })
       .then(function (cityData) {
         //current Day
-        document.getElementById('mainH').textContent = JSON.stringify(cityData.main.humidity);
-        document.getElementById('mainT').textContent = JSON.stringify(cityData.main.temp);
-        document.getElementById('cityName').textContent = JSON.stringify(cityData.name);
-        document.getElementById('mainW').textContent = JSON.stringify(cityData.wind.speed);
+        document.getElementById('mainH').textContent = JSON.stringify(cityData.main.humidity) + '%';
+        document.getElementById('mainT').textContent = Math.round(JSON.stringify(cityData.main.temp) - 273) + ' °C';
+        document.getElementById('cityName').textContent = JSON.stringify(cityData.name) + ' -  ';
+        document.getElementById('mainW').textContent = JSON.stringify(cityData.wind.speed) + ' m/s';
 
         document.getElementById('mainI').src = `http://openweathermap.org/img/wn/${cityData.weather[0].icon}.png`;
         //fetch UV
         let lat = JSON.stringify(cityData.coord.lat);
         let lon = JSON.stringify(cityData.coord.lon);
-        let url3 = 'http://api.openweathermap.org/data/2.5/uvi/history?appid=a20945d7ff2c1d7b2d2fb96e4f52ee9f&lat='+ lat + '&lon=' + lon + '&cnt=1&start=1498049953&end=1498481991';
+        let url3 = 'http://api.openweathermap.org/data/2.5/uvi?appid=a20945d7ff2c1d7b2d2fb96e4f52ee9f&lat=' + lat + '&lon=' + lon;
+
+        //---------------------------------------------------/  call Api 3  /--------------------------------------------------------------------
         fetch(url3)
         .then(function (result) {
           return result.json()
         })
         .then(function (cityData) {
           let UV = document.getElementById('UV');
-          UV.textContent = JSON.stringify(cityData[0].value);
-          if (UV.innerText < 3.00 ){
+          UV.textContent = JSON.stringify(cityData.value);
+          if (parseFloat(UV.textContent) < 3.00 ){
             UV.style.backgroundColor = "";
             UV.style.backgroundColor = "green";
           }
-          else if (UV.innerText < 6.00){
+          else if (parseFloat(UV.textContent) < 6.00){
             UV.style.backgroundColor = "";
             UV.style.backgroundColor = "yellow";
           }
-          else if (UV.innerText < 8.00){
+          else if (parseFloat(UV.textContent) < 8.00){
             UV.style.backgroundColor = "";
             UV.style.backgroundColor = "orange";
           }
-          else if (UV.innerText >= 8.00){
+          else if (parseFloat(UV.textContent) >= 8.00){
             UV.style.backgroundColor = "";
             UV.style.backgroundColor = "red";
           }
@@ -94,31 +98,32 @@ function displayCityInfo () {
 
         
       })
-    //call Api 2
+    
+    //---------------------------------------------------/  call Api 2  /--------------------------------------------------------------------
     fetch(url2)
       .then(function (result) {
         return result.json()
       })
       .then(function (cityData) {
         //day 1
-        document.getElementById('day1H').textContent = JSON.stringify(cityData.list[7].main.humidity);
-        document.getElementById('day1T').textContent = JSON.stringify(cityData.list[7].main.temp);
+        document.getElementById('day1H').textContent = JSON.stringify(cityData.list[7].main.humidity) + '%';
+        document.getElementById('day1T').textContent = Math.ceil(JSON.stringify(cityData.list[7].main.temp) - 273) + ' °C';
         document.getElementById('day1I').src = `http://openweathermap.org/img/wn/${cityData.list[7].weather[0].icon}.png`;
         //day 2
-        document.getElementById('day2H').textContent = JSON.stringify(cityData.list[15].main.humidity);
-        document.getElementById('day2T').textContent = JSON.stringify(cityData.list[15].main.temp);
+        document.getElementById('day2H').textContent = JSON.stringify(cityData.list[15].main.humidity) + '%';
+        document.getElementById('day2T').textContent = Math.ceil(JSON.stringify(cityData.list[15].main.temp) - 273) + ' °C';
         document.getElementById('day2I').src = `http://openweathermap.org/img/wn/${cityData.list[15].weather[0].icon}.png`;
         //day 3
-        document.getElementById('day3H').textContent = JSON.stringify(cityData.list[23].main.humidity);
-        document.getElementById('day3T').textContent = JSON.stringify(cityData.list[23].main.temp);
+        document.getElementById('day3H').textContent = JSON.stringify(cityData.list[23].main.humidity) + '%';
+        document.getElementById('day3T').textContent = Math.ceil(JSON.stringify(cityData.list[23].main.temp) - 273) + ' °C';
         document.getElementById('day3I').src = `http://openweathermap.org/img/wn/${cityData.list[23].weather[0].icon}.png`;
         //day 4
-        document.getElementById('day4H').textContent = JSON.stringify(cityData.list[31].main.humidity);
-        document.getElementById('day4T').textContent = JSON.stringify(cityData.list[31].main.temp);
+        document.getElementById('day4H').textContent = JSON.stringify(cityData.list[31].main.humidity) + '%';
+        document.getElementById('day4T').textContent = Math.ceil(JSON.stringify(cityData.list[31].main.temp) - 273) + ' °C';
         document.getElementById('day4I').src = `http://openweathermap.org/img/wn/${cityData.list[31].weather[0].icon}.png`;
         //day 5
-        document.getElementById('day5H').textContent = JSON.stringify(cityData.list[39].main.humidity);
-        document.getElementById('day5T').textContent = JSON.stringify(cityData.list[39].main.temp);
+        document.getElementById('day5H').textContent = JSON.stringify(cityData.list[39].main.humidity) + '%';
+        document.getElementById('day5T').textContent = Math.ceil(JSON.stringify(cityData.list[39].main.temp) - 273) + ' °C';
         document.getElementById('day5I').src = `http://openweathermap.org/img/wn/${cityData.list[39].weather[0].icon}.png`;
       })
 }
@@ -144,7 +149,7 @@ function renderButtons () {
     })
 }
 
-//Search Button---------------------------------------------------------------------
+//----------------------------------------------------------/  Search Button  /-------------------------------------------------------------
 searchBtn.addEventListener("click", addButtons)
 searchBtn.addEventListener("click", display )
 
@@ -162,36 +167,37 @@ function display (){
     })
     .then(function (cityData) {
       //current Day
-      document.getElementById('mainH').textContent = JSON.stringify(cityData.main.humidity);
-      document.getElementById('mainT').textContent = JSON.stringify(cityData.main.temp);
-      document.getElementById('cityName').textContent = JSON.stringify(cityData.name);
-      document.getElementById('mainW').textContent = JSON.stringify(cityData.wind.speed);
+      document.getElementById('mainH').textContent = JSON.stringify(cityData.main.humidity) + '%';
+      document.getElementById('mainT').textContent = Math.round(JSON.stringify(cityData.main.temp) - 273) + ' °C';
+      document.getElementById('cityName').textContent = JSON.stringify(cityData.name) + ' -  ';
+      document.getElementById('mainW').textContent = JSON.stringify(cityData.wind.speed) + ' m/s';
 
       document.getElementById('mainI').src = `http://openweathermap.org/img/wn/${cityData.weather[0].icon}.png`;
       //fetch UV
       let lat = JSON.stringify(cityData.coord.lat);
       let lon = JSON.stringify(cityData.coord.lon);
-      let url3 = 'http://api.openweathermap.org/data/2.5/uvi/history?appid=a20945d7ff2c1d7b2d2fb96e4f52ee9f&lat='+ lat + '&lon=' + lon + '&cnt=1&start=1498049953&end=1498481991';
+      let url3 = 'http://api.openweathermap.org/data/2.5/uvi?appid=a20945d7ff2c1d7b2d2fb96e4f52ee9f&lat=' + lat + '&lon=' + lon;
+      
       fetch(url3)
       .then(function (result) {
         return result.json()
       })
       .then(function (cityData) {
         let UV = document.getElementById('UV');
-        UV.textContent = JSON.stringify(cityData[0].value);
-        if (UV.innerText < 3.00 ){
+        UV.textContent = JSON.stringify(cityData.value);
+        if (parseFloat(UV.textContent) < 3.00 ){
           UV.style.backgroundColor = "";
           UV.style.backgroundColor = "green";
         }
-        else if (UV.innerText < 6.00){
+        else if (parseFloat(UV.textContent) < 6.00){
           UV.style.backgroundColor = "";
           UV.style.backgroundColor = "yellow";
         }
-        else if (UV.innerText < 8.00){
+        else if (parseFloat(UV.textContent) < 8.00){
           UV.style.backgroundColor = "";
           UV.style.backgroundColor = "orange";
         }
-        else if (UV.innerText >= 8.00){
+        else if (parseFloat(UV.textContent) >= 8.00){
           UV.style.backgroundColor = "";
           UV.style.backgroundColor = "red";
         }
@@ -206,27 +212,31 @@ function display (){
     })
     .then(function (cityData) {
       //day 1
-      document.getElementById('day1H').textContent = JSON.stringify(cityData.list[7].main.humidity);
-      document.getElementById('day1T').textContent = JSON.stringify(cityData.list[7].main.temp);
+      document.getElementById('day1H').textContent = JSON.stringify(cityData.list[7].main.humidity) + '%';
+      document.getElementById('day1T').textContent = Math.ceil(JSON.stringify(cityData.list[7].main.temp) - 273) + ' °C';
       document.getElementById('day1I').src = `http://openweathermap.org/img/wn/${cityData.list[7].weather[0].icon}.png`;
       //day 2
-      document.getElementById('day2H').textContent = JSON.stringify(cityData.list[15].main.humidity);
-      document.getElementById('day2T').textContent = JSON.stringify(cityData.list[15].main.temp);
+      document.getElementById('day2H').textContent = JSON.stringify(cityData.list[15].main.humidity) + '%';
+      document.getElementById('day2T').textContent = Math.ceil(JSON.stringify(cityData.list[15].main.temp) - 273) + ' °C';
       document.getElementById('day2I').src = `http://openweathermap.org/img/wn/${cityData.list[15].weather[0].icon}.png`;
       //day 3
-      document.getElementById('day3H').textContent = JSON.stringify(cityData.list[23].main.humidity);
-      document.getElementById('day3T').textContent = JSON.stringify(cityData.list[23].main.temp);
+      document.getElementById('day3H').textContent = JSON.stringify(cityData.list[23].main.humidity) + '%';
+      document.getElementById('day3T').textContent = Math.ceil(JSON.stringify(cityData.list[23].main.temp) - 273) + ' °C';
       document.getElementById('day3I').src = `http://openweathermap.org/img/wn/${cityData.list[23].weather[0].icon}.png`;
       //day 4
-      document.getElementById('day4H').textContent = JSON.stringify(cityData.list[31].main.humidity);
-      document.getElementById('day4T').textContent = JSON.stringify(cityData.list[31].main.temp);
+      document.getElementById('day4H').textContent = JSON.stringify(cityData.list[31].main.humidity) + '%';
+      document.getElementById('day4T').textContent = Math.ceil(JSON.stringify(cityData.list[31].main.temp) - 273) + ' °C';
       document.getElementById('day4I').src = `http://openweathermap.org/img/wn/${cityData.list[31].weather[0].icon}.png`;
       //day 5
-      document.getElementById('day5H').textContent = JSON.stringify(cityData.list[39].main.humidity);
-      document.getElementById('day5T').textContent = JSON.stringify(cityData.list[39].main.temp);
+      document.getElementById('day5H').textContent = JSON.stringify(cityData.list[39].main.humidity) + '%';
+      document.getElementById('day5T').textContent = Math.ceil(JSON.stringify(cityData.list[39].main.temp) - 273) + ' °C';
       document.getElementById('day5I').src = `http://openweathermap.org/img/wn/${cityData.list[39].weather[0].icon}.png`;
     })
   }
+
+//-------------------------------------------------------------------------------------------------------------------------------------------
+//-----------------------------------------------------------/    END    /-------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------------------------------------------------------
 
 
 

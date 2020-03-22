@@ -1,4 +1,5 @@
 
+/*Main Styles*/
 #navBar {
     background-color: black;
     font-size: 50px;
@@ -18,13 +19,7 @@
     height: 300px
 }
 /*sizing styles*/
-.container {
-    
-}
-.row {
-    
-    
-}
+
 .col {
     display: inline-block;
     color:white;
@@ -44,9 +39,7 @@
 .winfo {
     line-height: 30px;
 }
-.cityName {
-    line-height: 40px;
-}
+
 .cityN {
     margin-bottom: 0px;
 }
