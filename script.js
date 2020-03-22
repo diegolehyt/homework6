@@ -49,8 +49,8 @@ renderButtons()
 // Display City Weather 
 function displayCityInfo () {
     let cityInput = this.getAttribute('data-cityName')
-    let url = 'https://api.openweathermap.org/data/2.5/weather?q=' + cityInput + '&appid=a20945d7ff2c1d7b2d2fb96e4f52ee9f';
-    let url2 = 'https://api.openweathermap.org/data/2.5/forecast?q=' + cityInput + '&appid=a20945d7ff2c1d7b2d2fb96e4f52ee9f';
+    let url = 'HTTPS://api.openweathermap.org/data/2.5/weather?q=' + cityInput + '&appid=a20945d7ff2c1d7b2d2fb96e4f52ee9f';
+    let url2 = 'HTTPS://api.openweathermap.org/data/2.5/forecast?q=' + cityInput + '&appid=a20945d7ff2c1d7b2d2fb96e4f52ee9f';
     
     //---------------------------------------------------/  call Api 1  /--------------------------------------------------------------------
     fetch(url)
@@ -64,11 +64,11 @@ function displayCityInfo () {
         document.getElementById('cityName').textContent = JSON.stringify(cityData.name) + ' -  ';
         document.getElementById('mainW').textContent = JSON.stringify(cityData.wind.speed) + ' m/s';
 
-        document.getElementById('mainI').src = `http://openweathermap.org/img/wn/${cityData.weather[0].icon}.png`;
+        document.getElementById('mainI').src = `HTTPS://openweathermap.org/img/wn/${cityData.weather[0].icon}.png`;
         //fetch UV
         let lat = JSON.stringify(cityData.coord.lat);
         let lon = JSON.stringify(cityData.coord.lon);
-        let url3 = 'http://api.openweathermap.org/data/2.5/uvi?appid=a20945d7ff2c1d7b2d2fb96e4f52ee9f&lat=' + lat + '&lon=' + lon;
+        let url3 = 'HTTPS://api.openweathermap.org/data/2.5/uvi?appid=a20945d7ff2c1d7b2d2fb96e4f52ee9f&lat=' + lat + '&lon=' + lon;
 
         //---------------------------------------------------/  call Api 3  /--------------------------------------------------------------------
         fetch(url3)
@@ -108,23 +108,23 @@ function displayCityInfo () {
         //day 1
         document.getElementById('day1H').textContent = JSON.stringify(cityData.list[7].main.humidity) + '%';
         document.getElementById('day1T').textContent = Math.ceil(JSON.stringify(cityData.list[7].main.temp) - 273) + ' °C';
-        document.getElementById('day1I').src = `http://openweathermap.org/img/wn/${cityData.list[7].weather[0].icon}.png`;
+        document.getElementById('day1I').src = `HTTPS://openweathermap.org/img/wn/${cityData.list[7].weather[0].icon}.png`;
         //day 2
         document.getElementById('day2H').textContent = JSON.stringify(cityData.list[15].main.humidity) + '%';
         document.getElementById('day2T').textContent = Math.ceil(JSON.stringify(cityData.list[15].main.temp) - 273) + ' °C';
-        document.getElementById('day2I').src = `http://openweathermap.org/img/wn/${cityData.list[15].weather[0].icon}.png`;
+        document.getElementById('day2I').src = `HTTPS://openweathermap.org/img/wn/${cityData.list[15].weather[0].icon}.png`;
         //day 3
         document.getElementById('day3H').textContent = JSON.stringify(cityData.list[23].main.humidity) + '%';
         document.getElementById('day3T').textContent = Math.ceil(JSON.stringify(cityData.list[23].main.temp) - 273) + ' °C';
-        document.getElementById('day3I').src = `http://openweathermap.org/img/wn/${cityData.list[23].weather[0].icon}.png`;
+        document.getElementById('day3I').src = `HTTPS://openweathermap.org/img/wn/${cityData.list[23].weather[0].icon}.png`;
         //day 4
         document.getElementById('day4H').textContent = JSON.stringify(cityData.list[31].main.humidity) + '%';
         document.getElementById('day4T').textContent = Math.ceil(JSON.stringify(cityData.list[31].main.temp) - 273) + ' °C';
-        document.getElementById('day4I').src = `http://openweathermap.org/img/wn/${cityData.list[31].weather[0].icon}.png`;
+        document.getElementById('day4I').src = `HTTPS://openweathermap.org/img/wn/${cityData.list[31].weather[0].icon}.png`;
         //day 5
         document.getElementById('day5H').textContent = JSON.stringify(cityData.list[39].main.humidity) + '%';
         document.getElementById('day5T').textContent = Math.ceil(JSON.stringify(cityData.list[39].main.temp) - 273) + ' °C';
-        document.getElementById('day5I').src = `http://openweathermap.org/img/wn/${cityData.list[39].weather[0].icon}.png`;
+        document.getElementById('day5I').src = `HTTPS://openweathermap.org/img/wn/${cityData.list[39].weather[0].icon}.png`;
       })
 }
 
@@ -157,8 +157,8 @@ function display (){
   
   let j = cities.length - 1;
   let cityInput = cities[j];
-  let url = 'https://api.openweathermap.org/data/2.5/weather?q=' + cityInput + '&appid=a20945d7ff2c1d7b2d2fb96e4f52ee9f';
-  let url2 = 'https://api.openweathermap.org/data/2.5/forecast?q=' + cityInput + '&appid=a20945d7ff2c1d7b2d2fb96e4f52ee9f';
+  let url = 'HTTPS://api.openweathermap.org/data/2.5/weather?q=' + cityInput + '&appid=a20945d7ff2c1d7b2d2fb96e4f52ee9f';
+  let url2 = 'HTTPS://api.openweathermap.org/data/2.5/forecast?q=' + cityInput + '&appid=a20945d7ff2c1d7b2d2fb96e4f52ee9f';
   
   //call Api 1
   fetch(url)
@@ -172,11 +172,11 @@ function display (){
       document.getElementById('cityName').textContent = JSON.stringify(cityData.name) + ' -  ';
       document.getElementById('mainW').textContent = JSON.stringify(cityData.wind.speed) + ' m/s';
 
-      document.getElementById('mainI').src = `http://openweathermap.org/img/wn/${cityData.weather[0].icon}.png`;
+      document.getElementById('mainI').src = `HTTPS://openweathermap.org/img/wn/${cityData.weather[0].icon}.png`;
       //fetch UV
       let lat = JSON.stringify(cityData.coord.lat);
       let lon = JSON.stringify(cityData.coord.lon);
-      let url3 = 'http://api.openweathermap.org/data/2.5/uvi?appid=a20945d7ff2c1d7b2d2fb96e4f52ee9f&lat=' + lat + '&lon=' + lon;
+      let url3 = 'HTTPS://api.openweathermap.org/data/2.5/uvi?appid=a20945d7ff2c1d7b2d2fb96e4f52ee9f&lat=' + lat + '&lon=' + lon;
       
       fetch(url3)
       .then(function (result) {
@@ -214,23 +214,23 @@ function display (){
       //day 1
       document.getElementById('day1H').textContent = JSON.stringify(cityData.list[7].main.humidity) + '%';
       document.getElementById('day1T').textContent = Math.ceil(JSON.stringify(cityData.list[7].main.temp) - 273) + ' °C';
-      document.getElementById('day1I').src = `http://openweathermap.org/img/wn/${cityData.list[7].weather[0].icon}.png`;
+      document.getElementById('day1I').src = `HTTPS://openweathermap.org/img/wn/${cityData.list[7].weather[0].icon}.png`;
       //day 2
       document.getElementById('day2H').textContent = JSON.stringify(cityData.list[15].main.humidity) + '%';
       document.getElementById('day2T').textContent = Math.ceil(JSON.stringify(cityData.list[15].main.temp) - 273) + ' °C';
-      document.getElementById('day2I').src = `http://openweathermap.org/img/wn/${cityData.list[15].weather[0].icon}.png`;
+      document.getElementById('day2I').src = `HTTPS://openweathermap.org/img/wn/${cityData.list[15].weather[0].icon}.png`;
       //day 3
       document.getElementById('day3H').textContent = JSON.stringify(cityData.list[23].main.humidity) + '%';
       document.getElementById('day3T').textContent = Math.ceil(JSON.stringify(cityData.list[23].main.temp) - 273) + ' °C';
-      document.getElementById('day3I').src = `http://openweathermap.org/img/wn/${cityData.list[23].weather[0].icon}.png`;
+      document.getElementById('day3I').src = `HTTPS://openweathermap.org/img/wn/${cityData.list[23].weather[0].icon}.png`;
       //day 4
       document.getElementById('day4H').textContent = JSON.stringify(cityData.list[31].main.humidity) + '%';
       document.getElementById('day4T').textContent = Math.ceil(JSON.stringify(cityData.list[31].main.temp) - 273) + ' °C';
-      document.getElementById('day4I').src = `http://openweathermap.org/img/wn/${cityData.list[31].weather[0].icon}.png`;
+      document.getElementById('day4I').src = `HTTPS://openweathermap.org/img/wn/${cityData.list[31].weather[0].icon}.png`;
       //day 5
       document.getElementById('day5H').textContent = JSON.stringify(cityData.list[39].main.humidity) + '%';
       document.getElementById('day5T').textContent = Math.ceil(JSON.stringify(cityData.list[39].main.temp) - 273) + ' °C';
-      document.getElementById('day5I').src = `http://openweathermap.org/img/wn/${cityData.list[39].weather[0].icon}.png`;
+      document.getElementById('day5I').src = `HTTPS://openweathermap.org/img/wn/${cityData.list[39].weather[0].icon}.png`;
     })
   }
 
